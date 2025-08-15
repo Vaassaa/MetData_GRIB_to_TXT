@@ -7,6 +7,7 @@ Dissertation work
 from eccodes import codes_grib_new_from_file, codes_release, codes_get, codes_grib_find_nearest
 from datetime import datetime, timedelta
 import math
+import os
 
 # GPS location of amalia
 target_lat, target_lon = 50.125, 13.875 
