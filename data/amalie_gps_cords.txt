@@ -1,3 +1,7 @@
-#GPS coordinates of AMALIA Forest site 
+# GPS coordinates of AMALIA Forest site 
 50.0963283N, 13.8575806E
 50.10N, 13.86E
+
+# Rectange for ERA5 region pick
+# North East South West  
+50.5 14.0 50.0 13.5
