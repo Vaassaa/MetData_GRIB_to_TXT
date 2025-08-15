@@ -14,7 +14,7 @@ target_lat, target_lon = 50.125, 13.875
 # In/Out folder
 data_fol = "data/"
 out_fol = "out/"
-os.makedirs(out_dir, exist_ok=True)
+os.makedirs(out_fol, exist_ok=True)
 
 """
 --- Meteoroligical variable ---
@@ -23,24 +23,20 @@ os.makedirs(out_dir, exist_ok=True)
 # input_file = "precipitation_total.grib"
 # output_file = "rain.in"
 
-# varname, shortname = "temperature 2m", "2t"
-# input_file = "temp_dewtemp.grib"
-# output_file = "temp.in"
+varname, shortname = "temperature 2m", "2t"
+input_file = "temp_dewtemp.grib"
+output_file = "temp.in"
 
-varname, shortname = "low cloud cover", "lcc"
-input_file = "clouds.grib"
-output_file = "clouds.in"
+# varname, shortname = "low cloud cover", "lcc"
+# input_file = "clouds.grib"
+# output_file = "clouds.in"
 
 """
 --- Time window ---
 """
-# start_date = datetime(2022, 8, 17)
-# end_date = datetime(2022, 9, 30, 23, 59)
-# start_date = datetime(2023, 3, 23, 10, 00)
-# end_date = datetime(2023, 5, 24, 16, 00)
-start_date = datetime(2025, 4, 24, 4, 00)
-end_date = datetime(2025, 4, 24, 17, 00)
-time_step = 3600  # seconds
+start_date = datetime(2025, 7, 25, 00, 00)
+end_date = datetime(2025, 7, 30, 00, 00)
+time_step = 3600  # hrs -> seconds
 
 # Allocation
 data = []
