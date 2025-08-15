@@ -15,23 +15,21 @@ target_lat, target_lon = 50.125, 13.875
 # In/Out folder
 data_fol = "data/"
 out_fol = "out/"
-os.makedirs(out_dir, exist_ok=True)
+os.makedirs(out_fol, exist_ok=True)
 
 """
 --- Meteoroligical variable ---
 """
 varname = "relative humidity"
 input_file = "temp_dewtemp.grib"
-output_file = "RH.in"
+output_file = "rh.in"
 
 """
 --- Time window ---
 """
-# start_date = datetime(2023, 3, 23, 10, 00)
-# end_date = datetime(2023, 5, 24, 16, 00)
-start_date = datetime(2025, 4, 24, 4, 00)
-end_date = datetime(2025, 4, 24, 17, 00)
-time_step = 3600  # seconds
+start_date = datetime(2025, 7, 25, 00, 00)
+end_date = datetime(2025, 7, 30, 00, 00)
+time_step = 3600  # hrs -> seconds
 
 # Allocation
 temp_data = {}  
