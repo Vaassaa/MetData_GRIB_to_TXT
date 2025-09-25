@@ -12,7 +12,8 @@ import os
 target_lat, target_lon = 50.125, 13.875 
 
 # In/Out folder
-data_fol = "data/"
+campaign = "Amalie_2025-08-26_2025-09-07"
+data_fol = "data/"+campaign+"/"
 out_fol = "out/"
 os.makedirs(out_fol, exist_ok=True)
 
