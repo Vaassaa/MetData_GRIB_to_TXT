@@ -13,7 +13,8 @@ import os
 target_lat, target_lon = 50.125, 13.875 
 
 # In/Out folder
-data_fol = "data/"
+campaign = "Amalie_2025-08-26_2025-09-07"
+data_fol = "data/"+campaign+"/"
 out_fol = "out/"
 os.makedirs(out_fol, exist_ok=True)
 
@@ -27,8 +28,8 @@ output_file = "rh.in"
 """
 --- Time window ---
 """
-start_date = datetime(2025, 7, 25, 00, 00)
-end_date = datetime(2025, 7, 30, 00, 00)
+start_date = datetime(2025, 9, 5, 00, 00)
+end_date = datetime(2025, 9, 6, 12, 00)
 time_step = 3600  # hrs -> seconds
 
 # Allocation

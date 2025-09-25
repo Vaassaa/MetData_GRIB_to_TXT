@@ -35,8 +35,8 @@ output_file = "temp.in"
 """
 --- Time window ---
 """
-start_date = datetime(2025, 7, 25, 00, 00)
-end_date = datetime(2025, 7, 30, 00, 00)
+start_date = datetime(2025, 9, 5, 00, 00)
+end_date = datetime(2025, 9, 6, 12, 00)
 time_step = 3600  # hrs -> seconds
 
 # Allocation
