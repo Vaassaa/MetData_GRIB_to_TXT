@@ -1,5 +1,5 @@
 """
-Script for extraction and manipulation of Wind GRIB data
+Script for extraction and manipulation of relative humidity GRIB data
 Author: Vaclav Steinbach
 Date: 13.06.2025
 Dissertation work
@@ -13,7 +13,7 @@ import os
 target_lat, target_lon = 50.125, 13.875 
 
 # In/Out folder
-campaign = "Amalie_2025-08-26_2025-09-07"
+campaign = "Campaign_08-09-2024_30-09-2024"
 data_fol = "data/"+campaign+"/"
 out_fol = "out/"
 os.makedirs(out_fol, exist_ok=True)
@@ -21,19 +21,19 @@ os.makedirs(out_fol, exist_ok=True)
 """
 --- Meteoroligical variable ---
 """
-varname, shortname_u, shortname_v = "wind speed 10m", "10u", "10v"
-input_file = "wind.grib"
-output_file = "wind.in"
+varname = "relative humidity [%/100]"
+input_file = "temp_dewtemp.grib"
+output_file = "rh.in"
 
 """
 --- Time window ---
 """
-start_date = datetime(2025, 9, 5, 00, 00)
-end_date = datetime(2025, 9, 6, 12, 00)
+start_date = datetime(2024, 9, 8, 00, 00)
+end_date = datetime(2024, 9, 30, 00, 00)
 time_step = 3600  # hrs -> seconds
 
 # Allocation
-wind_data = {}  # valid_time: {"10u": val, "10v": val}
+temp_data = {}  
 
 with open(data_fol+input_file, "rb") as f:
     while True: # Loop through all messages
@@ -43,7 +43,7 @@ with open(data_fol+input_file, "rb") as f:
         try:
             # Pick out the variable name
             short_name = codes_get(gid, "shortName")
-            if short_name not in ["10u", "10v"]:
+            if short_name not in ["2t", "2d"]:
                 continue
 
             date = codes_get(gid, "dataDate")      # YYYYMMDD
@@ -67,27 +67,35 @@ with open(data_fol+input_file, "rb") as f:
             # data.append((valid_time, val))
 
             # Store in dict
-            if valid_time not in wind_data:
-                wind_data[valid_time] = {}
-            wind_data[valid_time][short_name] = avg_val
+            if valid_time not in temp_data:
+                temp_data[valid_time] = {}
+            temp_data[valid_time][short_name] = avg_val
 
             print(f"Appended data from {valid_time}")
         finally: # Frees memory
             codes_release(gid)
 
-# Compute Euler norm of wind vector
-wind_series = []
-for t in sorted(wind_data.keys()):
-    u = wind_data[t].get("10u")
-    v = wind_data[t].get("10v")
-    if u is not None and v is not None:
-        wind_speed = math.sqrt(u**2 + v**2)
-        wind_series.append(wind_speed)
+# Compute relative humidity from temperature and dew point temp
+RH_series = []
+for t in sorted(temp_data.keys()):
+    temp = temp_data[t].get("2t")
+    dewtemp = temp_data[t].get("2d")
+    if temp is not None and dewtemp is not None:
+        # Convert to Celsius
+        temp = temp - 273.15
+        dewtemp = dewtemp - 273.15
+
+        # Magnus formula
+        es = 6.112 * math.exp((17.67 * temp) / (temp + 243.5))
+        ed = 6.112 * math.exp((17.67 * dewtemp) / (dewtemp + 243.5))
+        # RH = 100 * (ed / es)
+        RH = ed / es
+        RH_series.append(RH)
 
 # Construct output file
 with open(out_fol+output_file, "w") as out:
     out.write(f"# time {varname}\n")
-    for i, val in enumerate(wind_series):
+    for i, val in enumerate(RH_series):
         seconds = i * time_step
         out.write(f"{seconds} {val}\n")
 

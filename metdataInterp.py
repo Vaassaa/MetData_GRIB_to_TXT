@@ -16,9 +16,11 @@ os.makedirs(out_fol, exist_ok=True)
 # Array of filenames
 filenames = ["temp",
              "rh",
+             "clouds",
              "wind"] 
 headers = ["temperature 2m [˚C]",
-          "relative humidity 2m [%]",
+          "relative humidity 2m [%/100]",
+           "total cloud cover [-]",
           "windspeed 10m [m/s]"]
 # set time step
 time_step = 600 # seconds

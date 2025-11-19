@@ -3,5 +3,5 @@
 50.10N, 13.86E
 
 # Rectange for ERA5 region pick
-# North East South West  
-50.5 14.0 50.0 13.5
+# North West East South 
+50.5 13.5 14.0 50.0 

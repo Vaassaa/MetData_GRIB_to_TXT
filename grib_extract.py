@@ -12,7 +12,7 @@ import os
 target_lat, target_lon = 50.125, 13.875 
 
 # In/Out folder
-campaign = "Amalie_2025-08-26_2025-09-07"
+campaign = "Campaign_08-09-2024_30-09-2024"
 data_fol = "data/"+campaign+"/"
 out_fol = "out/"
 os.makedirs(out_fol, exist_ok=True)
@@ -20,23 +20,23 @@ os.makedirs(out_fol, exist_ok=True)
 """
 --- Meteoroligical variable ---
 """
-# varname, shortname = "precipitation", "tp"
+# varname, shortname = "precipitation [mm/s]", "tp"
 # input_file = "precipitation_total.grib"
 # output_file = "rain.in"
 
-varname, shortname = "temperature 2m", "2t"
-input_file = "temp_dewtemp.grib"
-output_file = "temp.in"
+# varname, shortname = "temperature 2m [˚C]", "2t"
+# input_file = "temp_dewtemp.grib"
+# output_file = "temp.in"
 
-# varname, shortname = "low cloud cover", "lcc"
-# input_file = "clouds.grib"
-# output_file = "clouds.in"
+varname, shortname = "total cloud cover [-]", "tcc"
+input_file = "clouds.grib"
+output_file = "clouds.in"
 
 """
 --- Time window ---
 """
-start_date = datetime(2025, 9, 5, 00, 00)
-end_date = datetime(2025, 9, 6, 12, 00)
+start_date = datetime(2024, 9, 8, 00, 00)
+end_date = datetime(2024, 9, 30, 00, 00)
 time_step = 3600  # hrs -> seconds
 
 # Allocation

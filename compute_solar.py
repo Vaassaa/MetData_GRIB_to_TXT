@@ -21,8 +21,12 @@ timezone_offset = 1 # Prague
 """
 --- Time range ---
 """
-start_date = datetime(2025, 7, 25, 00, 00)
-end_date = datetime(2025, 7, 30, 00, 00)
+# start_date = datetime(2025, 7, 25, 00, 00)
+# end_date = datetime(2025, 7, 30, 00, 00)
+# start_date = datetime(2025, 9, 5, 00, 00)
+# end_date = datetime(2025, 9, 6, 12, 00)
+start_date = datetime(2024, 9, 8, 00, 00)
+end_date = datetime(2024, 9, 30, 00, 00)
 # set time step
 # time_step = timedelta(hours=1)
 time_step = timedelta(minutes=10)
@@ -90,7 +94,7 @@ def radiation(date_str, long, la, tz):
 
 # Generate time series
 with open(out_dir+output_file, "w") as out:
-    out.write("# time S_t\n")
+    out.write("# time[s] S_t[W.m2]\n")
     t = 0
     current = start_date
     while current <= end_date:
