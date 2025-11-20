@@ -24,13 +24,13 @@ os.makedirs(out_fol, exist_ok=True)
 # input_file = "precipitation_total.grib"
 # output_file = "rain.in"
 
-# varname, shortname = "temperature 2m [˚C]", "2t"
-# input_file = "temp_dewtemp.grib"
-# output_file = "temp.in"
+varname, shortname = "temperature 2m [˚C]", "2t"
+input_file = "temp_dewtemp.grib"
+output_file = "temp.in"
 
-varname, shortname = "total cloud cover [-]", "tcc"
-input_file = "clouds.grib"
-output_file = "clouds.in"
+# varname, shortname = "total cloud cover [-]", "tcc"
+# input_file = "clouds.grib"
+# output_file = "clouds.in"
 
 """
 --- Time window ---
@@ -89,7 +89,8 @@ precip_hourly = [val for (_, val) in data]
 
 # Construct output file
 with open(out_fol+output_file, "w") as out:
-    out.write(f"# time {varname}\n")
+    out.write(f"# campaign: {start_date} {end_date}\n")
+    out.write(f"# time[s] {varname}\n")
     for i, val in enumerate(precip_hourly):
         seconds = i * time_step
         out.write(f"{seconds} {val}\n")

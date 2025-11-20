@@ -94,7 +94,8 @@ for t in sorted(temp_data.keys()):
 
 # Construct output file
 with open(out_fol+output_file, "w") as out:
-    out.write(f"# time {varname}\n")
+    out.write(f"# campaign: {start_date} {end_date}\n")
+    out.write(f"# time[s] {varname}\n")
     for i, val in enumerate(RH_series):
         seconds = i * time_step
         out.write(f"{seconds} {val}\n")

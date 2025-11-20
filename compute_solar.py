@@ -94,6 +94,7 @@ def radiation(date_str, long, la, tz):
 
 # Generate time series
 with open(out_dir+output_file, "w") as out:
+    out.write(f"# campaign: {start_date} {end_date}\n")
     out.write("# time[s] S_t[W/m2]\n")
     t = 0
     current = start_date
