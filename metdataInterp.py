@@ -17,16 +17,23 @@ os.makedirs(out_fol, exist_ok=True)
 # Array of filenames
 filenames = ["temp",
              "rh",
-             "clouds",
+             # "clouds",
              "wind"] 
 headers = ["temperature 2m [˚C]",
           "relative humidity 2m [%/100]",
-           "total cloud cover [-]",
+           # "total cloud cover [-]",
           "windspeed 10m [m/s]"]
 
-# define campaign
-start_date = datetime(2024, 9, 8, 00, 00)
-end_date = datetime(2024, 9, 30, 00, 00)
+"""
+--- Time window ---
+"""
+# Rutter Calibration
+start_date = datetime(2025, 9, 24, 20, 00)
+end_date = datetime(2025, 9, 25, 20, 00)
+
+# Saito-Sakai Calibration
+# start_date = datetime(2024, 9, 8, 00, 00)
+# end_date = datetime(2024, 9, 30, 00, 00)
 
 # set time step
 time_step = 600 # seconds
