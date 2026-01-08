@@ -1,5 +1,5 @@
 """
-Script for extraction and manipulation of wind GRIB data
+Script for extraction and manipulation of Wind GRIB data
 Author: Vaclav Steinbach
 Date: 13.06.2025
 Dissertation work
@@ -13,7 +13,12 @@ import os
 target_lat, target_lon = 50.125, 13.875 
 
 # In/Out folder
-campaign = "Campaign_08-09-2024_30-09-2024"
+# Rutter Calibration
+campaign = "Campaign_2025-09-24_2025-09-25"
+
+# Saito-Sakai Calibration
+# campaign = "Campaign_2024-09-08_2024-09-30"
+
 data_fol = "data/"+campaign+"/"
 out_fol = "out/"
 os.makedirs(out_fol, exist_ok=True)
@@ -21,15 +26,21 @@ os.makedirs(out_fol, exist_ok=True)
 """
 --- Meteoroligical variable ---
 """
-varname, shortname_u, shortname_v = "wind speed 10m [m/s]", "10u", "10v"
+varname, shortname_u, shortname_v = "wind speed 10m", "10u", "10v"
 input_file = "wind.grib"
 output_file = "wind.in"
 
 """
 --- Time window ---
 """
-start_date = datetime(2024, 9, 8, 00, 00)
-end_date = datetime(2024, 9, 30, 00, 00)
+# Rutter Calibration
+start_date = datetime(2025, 9, 24, 20, 00)
+end_date = datetime(2025, 9, 25, 20, 00)
+
+# Saito-Sakai Calibration
+# start_date = datetime(2024, 9, 8, 00, 00)
+# end_date = datetime(2024, 9, 30, 00, 00)
+
 time_step = 3600  # hrs -> seconds
 
 # Allocation
@@ -86,8 +97,7 @@ for t in sorted(wind_data.keys()):
 
 # Construct output file
 with open(out_fol+output_file, "w") as out:
-    out.write(f"# campaign: {start_date} {end_date}\n")
-    out.write(f"# time[s] {varname}\n")
+    out.write(f"# time {varname}\n")
     for i, val in enumerate(wind_series):
         seconds = i * time_step
         out.write(f"{seconds} {val}\n")
